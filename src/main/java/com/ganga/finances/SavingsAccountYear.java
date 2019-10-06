@@ -2,6 +2,7 @@ package com.ganga.finances;
 
 public class SavingsAccountYear {
 
+    public int totalWithdrawn;
     private int interestRate;
     private int capitalGainsAmount;
     private int startingBalance = 0;
@@ -36,11 +37,22 @@ public class SavingsAccountYear {
 
     }
 
+    public int startingPrincipal(){
+        return startingBalance - capitalGainsAmount;
+    }
+
+    public int endingPrincipal() {
+        int result = startingPrincipal() - totalWithdrawn;
+        return Math.max(0, result);
+    }
+
     public int endingBalance() {
-        return (balance() + balance() * interestRate/100);
+    int modifiedStart = startingBalance - totalWithdrawn;
+        return (modifiedStart + modifiedStart * interestRate/100);
     }
 
     public void withdraw(int amount) {
-        startingBalance -= amount;
+        this.totalWithdrawn += amount;
+
     }
 }
