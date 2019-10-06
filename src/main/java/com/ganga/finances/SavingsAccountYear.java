@@ -1,30 +1,31 @@
 package com.ganga.finances;
 
-import jdk.jfr.StackTrace;
-
 public class SavingsAccountYear {
 
     private int interestRate;
-    private int balance = 0;
+    private int capitalGainsAmount;
+    private int startingBalance = 0;
 
     public SavingsAccountYear(){
     }
 
     public SavingsAccountYear(int startingBalance, int interestRate){
-        this.balance = startingBalance;
+        this.startingBalance = startingBalance;
         this.interestRate = interestRate;
     }
 
-    public void deposit(int amount){
-        balance+=amount;
+    public SavingsAccountYear(int startingBalance, int capitalGainsAmount, int interestRate) {
+        this.startingBalance = startingBalance;
+        this.capitalGainsAmount = capitalGainsAmount;
+        this.interestRate = interestRate;
     }
 
     public int balance() {
-        return balance;
+        return startingBalance;
     }
 
     public int startingBalance(){
-        return balance;
+        return startingBalance;
 
     }public int interestRate(){
         return interestRate;
@@ -37,5 +38,9 @@ public class SavingsAccountYear {
 
     public int endingBalance() {
         return (balance() + balance() * interestRate/100);
+    }
+
+    public void withdraw(int amount) {
+        startingBalance -= amount;
     }
 }
